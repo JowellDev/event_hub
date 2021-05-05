@@ -1,7 +1,7 @@
 import React from 'react';
 import './all.css';
 
-const AllEvent = () => {
+const AllEvents = () => {
     return(
         <div>
             <h1>All Event Page</h1>
@@ -9,4 +9,4 @@ const AllEvent = () => {
     )
 }
 
-export default AllEvent;
+export default AllEvents;
