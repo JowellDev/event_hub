@@ -16,9 +16,10 @@ D'autres fonctionnalités comme l'achat de ticket via l'application sont prevues
 
 
 La plateforme web E-vent HUB est conçu avec :
+
+
         - Frontent:
             ReactJs (Librairie JavaScript pour la création d'Interface utilisateur) (https://reactjs.org/)
             Bootstrap (Framework CSS) (https://getbootstrap.com/)
-        
         - Backend
             API Flask (Microframwork Python)
