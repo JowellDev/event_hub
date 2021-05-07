@@ -1,4 +1,37 @@
 .wrapper{
-    margin-top: 30px;
-    padding: 15px 20px;
+    margin-top: 50px;
+}
+
+.wrapper .content{
+    height: 360px;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: #424558 0px 1px 6px -2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.wrapper .content h2{
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.wrapper .content:hover{
+    box-shadow: #424558 0px 1px 6px -1px;
+    transition: all .4s ease-in-out;
+}
+
+.wrapper .content:hover .register-img{
+    transition: all .4s ease-in-out;
+    transform: scale(1.04);
+}
+
+.wrapper .content .register-img{
+    width: 150px;
+    height: 150px;
 }
