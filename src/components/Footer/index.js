@@ -6,7 +6,7 @@ function Footer() {
     return (
         <footer>
             <div className="container-fluid">
-                <h3 className="text-center">Copyright <span>E</span>-vent <span>H</span>ub {date}</h3>
+                <h3 className="text-center">Copyright E-vent Hub {date}</h3>
             </div>
         </footer>
         

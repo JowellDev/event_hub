@@ -1,6 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Logo from '../Logo';
 import './style.css';
+import ROUTE from '../../Route';
 
 const Header = () => {
     return(
@@ -12,8 +14,8 @@ const Header = () => {
                     </div>
                     <nav>
                         <ul className="menu">
-                            <li className="menu-item">inscription</li>
-                            <li className="menu-item">connexion</li>
+                            <Link to={ROUTE.REGISTER} className="menu-item">inscription</Link>
+                            <Link to={ROUTE.LOGIN} className="menu-item">connexion</Link>
                         </ul>
                     </nav>
                 </div>

@@ -1,5 +1,5 @@
 .logo h3, .logo span{
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     color: #fff;
     opacity: .97;
     font-family: 'Lobster';
@@ -8,10 +8,10 @@
 
 .logo h3 .e-letter, .logo h3 .h-letter{
     text-transform: uppercase;
-    font-size: 60px;
+    font-size: 40px;
     color: #F70F0F;
 }
 
-.logo h3{
+/* .logo h3{
     border-bottom: 5px dashed #fff;
-}
+} */

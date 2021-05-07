@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import ROUTE from './Route'
 import Home from './pages/Home';
+import Register from './pages/Auth/Register';
+import Login from './pages/Auth/Login';
 
 
 const App = () => {
@@ -11,6 +13,9 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path={ROUTE.HOME} component={Home}/>
+          <Route exact path={ROUTE.REGISTER} component={Register}/>
+          <Route exact path={ROUTE.LOGIN} component={Login}/>
+
         </Switch>
       </Router>
     </div>

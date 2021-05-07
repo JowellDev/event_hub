@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import ROUTE from '../../Route';
 import './style.css';
 
 const HomeUserCard = () => {
@@ -15,9 +17,7 @@ const HomeUserCard = () => {
                                 <li>Ajouter un event comme favori</li>
                                 <li>Achéter des tickets</li>
                             </ul>
-                            <button className="card-container-btn user-btn">
-                                creer un compte
-                            </button>
+                            <Link to={ROUTE.REGISTER} className="card-container-btn user-btn">creer un compte</Link>
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -29,9 +29,7 @@ const HomeUserCard = () => {
                                 <li>Voir la liste des participants à un event</li>
                                 <li>Vendre des tickets</li>
                             </ul>
-                            <button className="card-container-btn manager-btn">
-                                creer un compte
-                            </button>
+                            <Link to={ROUTE.REGISTER} className="card-container-btn manager-btn">creer un compte</Link>
                         </div>
                     </div>
                 </div>

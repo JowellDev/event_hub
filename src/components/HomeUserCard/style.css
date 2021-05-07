@@ -7,7 +7,7 @@
     text-align: center;
     margin-bottom: 20px;
     text-transform: uppercase;
-    color: grey;
+    color: #424558;
     font-weight: 700;
 }
 
@@ -16,12 +16,12 @@
 }
 
 #user-card .card-container{
-    color: grey;
+    color: #424558;
     border-radius: 6px;
     font-weight: 200;
     margin-top: 20px;
     padding: 10px;
-    box-shadow: grey 0px 1px 6px -2px;
+    box-shadow: #424558 0px 1px 6px -2px;
     font-size: 20px;
 }
 
@@ -34,7 +34,7 @@
 
 #user-card .card-container:hover{
     transition: all .4s ease-in-out;
-    box-shadow:  grey 0px 1px 6px -.4px;
+    box-shadow:  #424558 0px 1px 6px -.4px;
 }
 
 
@@ -58,19 +58,26 @@
     border: none;
     border-radius: 8px;
     text-transform: uppercase;
-    background-color: grey;
+    background-color: #424558;
     color: #fff;
+}
+
+#user-card .card-container .card-container-btn:hover{
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #user-card .card-manager:hover .manager-btn{
     background-color: #fff;
     color: #F70F0F;
+    text-decoration: none;
 }
 
 #user-card .card-user:hover .user-btn{
     background-color: #F70F0F;
     color: #fff;
     transition: all .5s ease-in-out;
+    text-decoration: none;
 }
 
 

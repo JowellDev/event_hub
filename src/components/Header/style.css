@@ -40,6 +40,7 @@ header .navigation nav ul .menu-item:hover{
     background-color: #F70F0F;
     border-color: #F70F0F;
     transition: all .3s ease-in-out;
+    text-decoration: none;
 }
 
 header .header-content{
