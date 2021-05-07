@@ -1,0 +1,50 @@
+#fonctionnality{
+    margin-top: 60px;
+}
+#fonctionnality .section-title{
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    color: grey;
+    font-weight: 700;
+}
+
+#fonctionnality .section-title h3 span{
+    color: #F70F0F;
+}
+
+#fonctionnality .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80px;
+    padding: 10px;
+    color: grey;
+}
+
+#fonctionnality .info:hover{
+    transform: scale(1.01);
+    transition: all .3s ease-in;
+    cursor: pointer;
+    color: #F70F0F;
+    box-shadow: grey 0px 1px 6px -2px;
+}
+
+#fonctionnality .info:hover img{
+    transform: translate(20px);
+    transition: all .4s ease-in-out;
+}
+
+#fonctionnality .info p{
+    text-align: center;
+    font-weight: 700;
+}
+
+#fonctionnality .info img{
+    width: 150px;
+    height: 150px;
+}
+
+#fonctionnality .info p{
+    margin-top: 20px;
+}
