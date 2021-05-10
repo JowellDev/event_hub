@@ -13,12 +13,12 @@ function Register() {
             <Navbar/>
             <div className="container wrapper">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 content left" data-aos="zoom-in" data-aos-duration="1500"> 
+                    <div className="col-md-5 content left" data-aos="zoom-in" data-aos-duration="1500"> 
                         <h2>grand public</h2>
                         <img src={publicImg} alt="register" className="register-img"/>
                         <Link to={ROUTE.PUBLIC_REGISTER} className="btn btn-dark">créer mon compte utilisateur</Link>
                     </div>
-                    <div className="col-md-4 content right" data-aos="zoom-in" data-aos-duration="1000">
+                    <div className="col-md-5 content right" data-aos="zoom-in" data-aos-duration="1000">
                         <h2>organisateur</h2>
                         <img src={organiserImg} alt="register" className="register-img"/>
                         <Link to={ROUTE.ORGANISER_REGISTER} className="btn btn-danger">créer mon compte organisateur</Link>

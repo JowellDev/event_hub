@@ -9,7 +9,7 @@ const HomeUserCard = () => {
             <div className="container">
                 <div className="row mb-5">
                     <div className="col-md-6">
-                        <div className="card-container card-user">
+                        <div className="card-container card-user" data-aos="zoom-in" data-aos-duration="1500">
                             <h3>grand public</h3>
                             <p>Vous aurez la possibilité de : </p>
                             <ul>
@@ -21,7 +21,7 @@ const HomeUserCard = () => {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="card-container card-manager">
+                        <div className="card-container card-manager" data-aos="zoom-in" data-aos-duration="1500">
                             <h3>organisateur</h3>
                             <p>Vous aurez la possibilité de : </p>
                             <ul>

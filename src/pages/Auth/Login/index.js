@@ -13,12 +13,12 @@ function Login() {
             <Navbar/>
             <div className="container wrapper">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 content left" data-aos="fade-right" data-aos-duration="1000">
+                    <div className="col-md-5 content left" data-aos="fade-right" data-aos-duration="1000">
                         <h2>grand public</h2>
                         <img src={signin} alt="login" className="login-img"/>
                         <Link to={ROUTE.PUBLIC_LOGIN} className="btn btn-dark">connexion à son espace utilisateur</Link>
                     </div>
-                    <div className="col-md-4 content right" data-aos="fade-left" data-aos-duration="1500">
+                    <div className="col-md-5 content right" data-aos="fade-left" data-aos-duration="1500">
                         <h2>organisateur</h2>
                         <img src={sign} alt="login" className="login-img"/>
                         <Link to={ROUTE.ORGANISER_LOGIN} className="btn btn-danger">connexion à son espace organisateur</Link>

@@ -12,19 +12,19 @@ const FonctionnalitySection = () => {
                     <div className="section-title col-md-12">
                         <h3>pourquoi <span>e-vent hub</span> ?</h3>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4" data-aos="fade-up" data-aos-duration="1800">
                         <div className="info">
                             <img src={informedSvg} alt="Rester informé" className="info-svg"/>
                             <p>Rester informés de chaque events qui aura lieu</p>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4" data-aos="zoom-in" data-aos-duration="1800">
                         <div className="info">
                             <img src={manangerSvg} alt="Organisation d'event " className="info-svg"/>
                             <p>Organiser et publier des events</p>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4" data-aos="fade-down" data-aos-duration="1800">
                         <div className="info">
                             <img src={ticketSvg} alt="Achat de ticket" className="info-svg"/>
                             <p>Payement de tickets</p>
