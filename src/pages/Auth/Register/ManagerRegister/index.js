@@ -1,12 +1,34 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import InputField from '../../../../components/InputField';
+import ManagerAuthContext from '../../../../context/Auth/ManagerAuth/ManagerAuthContext';
+import AlertContext from '../../../../context/Alert/AlertContext';
+import Alert from '../../../../components/Alert';
+import ROUTE from '../../../../Route';
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
 import './style.css'
 
-function ManagerRegister() {
+const ManagerRegister = (props) => {
+
+    const managerAuthContext = useContext(ManagerAuthContext);
+    const alertContext = useContext(AlertContext)
+    const {managerRegister, managerIsAuth, error, clearError} = managerAuthContext;
+    const {setAlert} = alertContext;
+
+    useEffect(() => {
+        if(managerIsAuth){
+            props.history.push(ROUTE.EVENTS)
+        }
+
+        if(error){
+            setAlert(error, 'danger')
+            clearError()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [error, managerIsAuth, props.history])
+
     const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     const formik = useFormik({
         initialValues: {
@@ -39,7 +61,7 @@ function ManagerRegister() {
                 .required('ce champs est requis')
         }),
         onSubmit: (values) => {
-            console.log(values);
+            managerRegister(values);
         },
       });
 
@@ -53,6 +75,9 @@ function ManagerRegister() {
                 </h3>
                 <div className="form-wrapper">
                     <form onSubmit={formik.handleSubmit}>
+                        <div className="col-md-12">
+                            <Alert/>
+                        </div>
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="text"
@@ -137,7 +162,7 @@ function ManagerRegister() {
                                 <div className="error">{formik.errors.confirmPassword}</div>
                             ) : null}
                         </div>
-                        <div class="col-md-12 mb-2">
+                        <div className="col-md-12 mb-2">
                             <button type="submit" className="btn btn-primary btn-block">s'inscrire</button>
                         </div>
                     </form>

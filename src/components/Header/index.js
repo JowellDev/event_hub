@@ -23,7 +23,7 @@ const Header = () => {
                     <h4 className="welcome-h4">bienvenue sur e-vent hub</h4>
                     <h4 className="plateforme-h4">plateforme</h4>
                     <h4 className="event-h4">evenementiel</h4>
-                    <button className="header-event-btn">Evenements à venir</button>
+                    <Link className="header-event-btn" to={ROUTE.EVENTS}>Evenements à venir</Link>
                 </div>
             </div>
         </header>

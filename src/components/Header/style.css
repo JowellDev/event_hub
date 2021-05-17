@@ -84,4 +84,5 @@ header .header-content .header-event-btn{
     color: #F70F0F;
     transition: all .3s ease-in-out;
     font-weight: 800;
+    text-decoration: none;
 }

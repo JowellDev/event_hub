@@ -1,12 +1,36 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import InputField from '../../../../components/InputField';
-import { useFormik } from 'formik';
+import UserAuthContext from '../../../../context/Auth/UserAuth/UserAuthContext';
+import AlertContext from '../../../../context/Alert/AlertContext';
+import Alert from '../../../../components/Alert';
+import ROUTE from '../../../../Route';
+import { useFormik } from 'formik'; 
  import * as Yup from 'yup';
 import './style.css'
 
-function UserLogin() {
+function UserLogin(props) {
+
+    const userAuthContext = useContext(UserAuthContext);
+    const alertContext = useContext(AlertContext)
+    const {loginUser, userIsAuth, error, clearError} = userAuthContext;
+    const {setAlert} = alertContext;
+
+
+    useEffect(() => {
+        if(userIsAuth){
+            props.history.push(ROUTE.HOME)
+        }
+
+        if(error){
+            setAlert(error, 'danger')
+            clearError()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [error, userIsAuth, props.history])
+
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -21,7 +45,7 @@ function UserLogin() {
                 .required('ce champs est requis'),
         }),
         onSubmit: (values) => {
-            console.log(values);
+            loginUser(values);
         },
       });
 
@@ -35,6 +59,9 @@ function UserLogin() {
                 </h3>
                 <div className="form-wrapper">
                     <form onSubmit={formik.handleSubmit}>
+                        <div className="col-md-12">
+                            <Alert/>
+                        </div>
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="email"
@@ -63,7 +90,7 @@ function UserLogin() {
                                 <div className="error">{formik.errors.password}</div>
                             ) : null}
                         </div>
-                        <div class="col-md-12 mb-2">
+                        <div className="col-md-12 mb-2">
                             <button type="submit" className="btn btn-primary btn-block">se connecter</button>
                         </div>
                     </form>

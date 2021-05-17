@@ -1,12 +1,33 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import InputField from '../../../../components/InputField';
+import UserAuthContext from '../../../../context/Auth/UserAuth/UserAuthContext';
+import AlertContext from '../../../../context/Alert/AlertContext';
+import Alert from '../../../../components/Alert';
+import ROUTE from '../../../../Route';
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
 import './style.css'
 
-function UserRegister() {
+function UserRegister(props) {
+    const userAuthContext = useContext(UserAuthContext)
+    const alertContext = useContext(AlertContext)
+    const {userRegister, error, clearError, userIsAuth} = userAuthContext;
+    const {setAlert} = alertContext;
+
+    useEffect(() => {
+        if(userIsAuth){
+            props.history.push(ROUTE.EVENTS);
+        }
+
+        if(error){
+            setAlert(error, 'danger')
+            clearError()
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [error, userIsAuth, props.history])
+
     const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     const formik = useFormik({
         initialValues: {
@@ -21,11 +42,11 @@ function UserRegister() {
         validationSchema: Yup.object({
             firstName: Yup.string()
                 .min(3, 'Au moins Trois(3) caractères !')
-                .max(15, 'Quinze(15) caratères au maximum !')
+                .max(50, 'Quinze(15) caratères au maximum !')
                 .required('ce champs est requis !'),
             lastName: Yup.string()
                 .min(3, 'Au moins Trois(3) caractères !')
-                .max(15, 'Quinze(15) caratères au maximum !')
+                .max(50, 'Quinze(15) caratères au maximum !')
                 .required('ce champs est requis !'),
             email: Yup.string()
                 .email('Email invalide')
@@ -44,9 +65,9 @@ function UserRegister() {
                 .required('ce champs est requis')
         }),
         onSubmit: (values) => {
-            console.log(values);
-        },
-      });
+            userRegister(values);
+        }
+      })
 
 
     return (
@@ -58,6 +79,9 @@ function UserRegister() {
                 </h3>
                 <div className="form-wrapper">
                     <form onSubmit={formik.handleSubmit}>
+                        <div className="col-md-12">
+                            <Alert/>
+                        </div>
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="text"
@@ -156,7 +180,7 @@ function UserRegister() {
                                 <div className="error">{formik.errors.confirmPassword}</div>
                             ) : null}
                         </div>
-                        <div class="col-md-12 mb-2">
+                        <div className="col-md-12 mb-2">
                             <button type="submit" className="btn btn-primary btn-block">s'inscrire</button>
                         </div>
                     </form>

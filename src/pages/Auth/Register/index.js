@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import publicImg from '../../../images/svg/register.svg';
 import organiserImg from '../../../images/svg/organiser.svg';
+import UserAuthContext from '../../../context/Auth/UserAuth/UserAuthContext';
+import ManagerAuthContext from '../../../context/Auth/UserAuth/UserAuthContext';
 import ROUTE from '../../../Route';
 import './style.css';
 
-function Register() {
+const Register = (props) => {
+    const userAuthContext = useContext(UserAuthContext);
+    const {userIsAuth} = userAuthContext;
+    const managerAuthContext = useContext(ManagerAuthContext);
+    const {managerIsAuth} = managerAuthContext;
+
+    useEffect(() => {
+        if(userIsAuth || managerIsAuth){
+            props.history.push(ROUTE.EVENTS);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userIsAuth, props.history])
     return (
         <div>
             <Navbar/>

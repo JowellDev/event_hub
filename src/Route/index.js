@@ -1,12 +1,12 @@
 const Route = {
     HOME: '/',
-    REGISTER: '/inscription',
-    PUBLIC_REGISTER: '/public/inscription',
-    ORGANISER_REGISTER: '/organisateur/inscription',
-    LOGIN: '/connexion',
-    PUBLIC_LOGIN: '/public/connexion',
-    ORGANISER_LOGIN: '/ogranisateur/connexion'
-    
+    REGISTER: '/register',
+    PUBLIC_REGISTER: '/user/register',
+    ORGANISER_REGISTER: '/organizer/register',
+    LOGIN: '/login',
+    PUBLIC_LOGIN: '/user/login',
+    ORGANISER_LOGIN: '/organizer/login',
+    EVENTS: '/evenements'
 }
 
 export default Route;
