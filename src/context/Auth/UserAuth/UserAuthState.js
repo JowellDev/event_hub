@@ -1,13 +1,10 @@
 import {useReducer} from 'react';
 import UserAuthContext from './UserAuthContext';
 import UserAuthReducer from './UserAuthReducer';
-import axios  from 'axios';
-import setAuthToken from '../../../utils/setAuthToken';
+import Api from '../../../utils/api';
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    USER_LOADED,
-    AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
@@ -22,76 +19,33 @@ const UserAuthState = props =>{
         error: null,
         user: null
     }
-    const [state, dispatch] = useReducer(UserAuthReducer, initialState)
-    const config = {
-        header: {
-            'content-type': 'application/json'
-        }
-    }
+    const [state, dispatch] = useReducer(UserAuthReducer, initialState);
 
-    //Load authenticated user
-    const loadUser = async () => {
-        if(localStorage.token){
-            setAuthToken(localStorage.token)
-        }
-
-        try {
-            //const res = await axios.get('url')
-            const res = {
-                data:{
-                    firstname: 'Digbeu',
-                    lastname: 'Joël Ephraïm',
-                    email: 'joeldigbeu@gmail.com',
-                    phone: '0758991427',
-                    address: 'Abobo pk18'
-                }
-            }
-            dispatch({type: USER_LOADED, payload: res.data})
-        } catch (err) {
-            dispatch({type:AUTH_ERROR, payload: err.res.data.msg})
-        }
-    }
-
-    //Register user
     const userRegister = async (FormData) => {
         try {
-            /* const res = await axios.post('url', FormData, config) */
-            const res = {
-                data : {
-                    token: 'qfkjghfjgkgHJHFVJHVjjkbkjbJHV'
-                }
-            }
-            dispatch({type: REGISTER_SUCCESS, payload: res.data})
-            loadUser()
+            const res = await Api.post('/user/register', FormData);
+            console.log(res)
+            dispatch({type: REGISTER_SUCCESS, payload: res.data});
         } catch (err) {
-            dispatch({type: REGISTER_FAIL, payload: err.res.data.msg})
+            console.log(err)
+            dispatch({type: REGISTER_FAIL, payload: err.response.data.message});
         }
-
     }
 
-    //Login user
-    const loginUser =async (FormData) => {
+    const loginUser = async (FormData) => {
         try{
-            //const res = await axios.post('url', FormData, config)
-            const res = {
-                data : {
-                    token: 'qfkjghfjgkgHJHFVJHVjjkbkjbJHV'
-                }
-            }
-            dispatch({type: LOGIN_SUCCESS, payload: res.data})
-            loadUser()
+            const res = await Api.post('/user/login', FormData);
+            dispatch({type: LOGIN_SUCCESS, payload: res.data});
         } catch (err) {
-            dispatch({type: LOGIN_FAIL, payload: err.res.data.msg})
+            dispatch({type: LOGIN_FAIL, payload: err.response.data.message});
         }
     }
 
-    //Logout user
-    const logoutUser = () => {
-        dispatch({type: LOGOUT})
+    const logoutUser = async () => {
+        dispatch({type: LOGOUT});
     }
 
-    //clear error
-    const clearError = () => dispatch({type:CLEAR_ERRORS})
+    const clearError = () => dispatch({type:CLEAR_ERRORS});
 
     return(
         <UserAuthContext.Provider
@@ -103,7 +57,6 @@ const UserAuthState = props =>{
                 user: state.user,
                 userRegister,
                 loginUser,
-                loadUser,
                 logoutUser,
                 clearError
             }}

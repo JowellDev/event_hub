@@ -34,8 +34,7 @@ const ManagerRegister = (props) => {
         initialValues: {
             name: '',
             email: '',
-            phone: '',
-            address: '',
+            contacts: '',
             password: '',
             confirmPassword: ''
         },
@@ -47,11 +46,9 @@ const ManagerRegister = (props) => {
             email: Yup.string()
                 .email('Email invalide')
                 .required('ce champ est requis !'),
-            phone: Yup.string()
+            contacts: Yup.string()
                 .min(10, 'Le numéro doit contenir 10 chiffres !')
                 .matches(phoneRegex, "Numéro invalide")
-                .required('ce champ est requis !'),
-            address: Yup.string()
                 .required('ce champ est requis !'),
             password: Yup.string()
                 .min(6, 'Votre mot de passe doit contenir au moins six(6) caractères !')
@@ -61,6 +58,7 @@ const ManagerRegister = (props) => {
                 .required('ce champs est requis')
         }),
         onSubmit: (values) => {
+            delete values.confirmPassword;
             managerRegister(values);
         },
       });
@@ -109,29 +107,15 @@ const ManagerRegister = (props) => {
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="tel"
-                                name="phone"
-                                id="phone"
+                                name="contacts"
+                                id="contacts"
                                 placeholder="Entrer votre numéro de téléphone"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.phone}
+                                value={formik.values.contacts}
                             />
-                            {formik.touched.phone && formik.errors.phone ? (
-                                <div className="error">{formik.errors.phone}</div>
-                            ) : null}
-                        </div>
-                        <div className="col-md-12 mb-2">
-                            <InputField
-                                type="text"
-                                name="address"
-                                id="address"
-                                placeholder="Entrer votre adresse"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.address}
-                            />
-                            {formik.touched.address && formik.errors.address ? (
-                                <div className="error">{formik.errors.address}</div>
+                            {formik.touched.contacts && formik.errors.contacts ? (
+                                <div className="error">{formik.errors.contacts}</div>
                             ) : null}
                         </div>
                         <div className="col-md-12 mb-2">

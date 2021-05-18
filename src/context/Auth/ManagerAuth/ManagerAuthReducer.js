@@ -1,8 +1,6 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    MANAGER_LOADED,
-    AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
@@ -12,11 +10,12 @@ import {
 const reducer = (state, action) => {
     switch (action.type) {
         case REGISTER_SUCCESS:
-          localStorage.setItem('token', action.payload.token)
+          localStorage.setItem('token', action.payload.token.access_token)
           return{
                 ...state,
-                ...action.payload,
+                token: action.payload.token.access_token,
                 managerIsAuth: true,
+                manager: action.payload.organizer,
                 loading: false
           }
         case REGISTER_FAIL:
@@ -30,11 +29,12 @@ const reducer = (state, action) => {
                 loading: true
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem('token', action.payload.token.access_token)
             return{
                 ...state,
-                ...action.payload,
+                token: action.payload.token.access_token,
                 managerIsAuth: true,
+                manager: action.payload.organizer,
                 loading: false
             }
         case LOGIN_FAIL:
@@ -46,22 +46,6 @@ const reducer = (state, action) => {
                 manager: null,
                 error: action.payload,
                 loading: true
-            }
-        case MANAGER_LOADED:
-            return{
-                ...state,
-                managerIsAuth: true,
-                manager: action.payload,
-                loading:false
-            }
-        case AUTH_ERROR:
-            localStorage.removeItem('token')
-            return{
-                ...state,
-                token: null,
-                managerIsAuth: false,
-                manager: null,
-                loading:true
             }
         case LOGOUT:
             localStorage.removeItem('token')

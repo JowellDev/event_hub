@@ -1,13 +1,10 @@
 import {useReducer} from 'react';
 import ManagerAuthContext from './ManagerAuthContext';
 import ManagerAuthReducer from './ManagerAuthReducer';
-import axios  from 'axios';
-import setAuthToken from '../../../utils/setAuthToken';
+import Api from '../../../utils/api';
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    MANAGER_LOADED,
-    AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
@@ -23,75 +20,32 @@ const ManagerAuthState = props =>{
         manager: null
     }
     const [state, dispatch] = useReducer(ManagerAuthReducer, initialState)
-    const config = {
-        header: {
-            'content-type': 'application/json'
-        }
-    }
 
-    //Load authenticated manager
-    const loadManager = async () => {
-        if(localStorage.token){
-            setAuthToken(localStorage.token)
-        }
-
-        try {
-            //const res = await axios.get('url')
-            const res = {
-                data:{
-                    firstname: 'Digbeu',
-                    lastname: 'Joël Ephraïm',
-                    email: 'joeldigbeu@gmail.com',
-                    phone: '0758991427',
-                    address: 'Abobo pk18'
-                }
-            }
-            dispatch({type: MANAGER_LOADED, payload: res.data})
-        } catch (err) {
-            dispatch({type:AUTH_ERROR, payload: err.res.data.msg})
-        }
-    }
-
-    //Register manager
+    
     const managerRegister = async (FormData) => {
         try {
-            //const res = await axios.post('url', FormData, config)
-            const res = {
-                data : {
-                    token: 'qfkjghfjgkgHJHFVJHVjjkbkjbJHV'
-                }
-            }
+            const res = await Api.post('/organizer/register', FormData)
+            console.log(res);
             dispatch({type: REGISTER_SUCCESS, payload: res.data})
-            loadManager()
         } catch (err) {
-            dispatch({type: REGISTER_FAIL, payload: err.res.data.msg})
+            dispatch({type: REGISTER_FAIL, payload: err.response.data.message})
         }
-
     }
 
-    //Login manager
     const loginManager =async (FormData) => {
         try{
-            //const res = await axios.post('url', FormData, config)
-            const res = {
-                data : {
-                    token: 'qfkjghfjgkgHJHFVJHVjjkbkjbJHV'
-                }
-            }
-            dispatch({type: LOGIN_SUCCESS, payload: res.data})
-            loadManager()
+            const res = await Api.post('/organizer/login', FormData);
+            dispatch({type: LOGIN_SUCCESS, payload: res.data});
         } catch (err) {
-            dispatch({type: LOGIN_FAIL, payload: err.res.data.msg})
+            dispatch({type: LOGIN_FAIL, payload: err.response.data.message});
         }
     }
 
-    //Logout manager
-    const logoutManager = () => {
+    const logoutManager = async () => {
         dispatch({type: LOGOUT})
     }
 
-    //clear error
-    const clearError = () => dispatch({type:CLEAR_ERRORS})
+    const clearError = () => dispatch({type:CLEAR_ERRORS});
 
     return(
         <ManagerAuthContext.Provider
@@ -103,7 +57,6 @@ const ManagerAuthState = props =>{
                 manager: state.manager,
                 managerRegister,
                 loginManager,
-                loadManager,
                 logoutManager,
                 clearError
             }}

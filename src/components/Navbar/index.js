@@ -1,10 +1,9 @@
-import React, {useContext, Fragment, useEffect} from 'react';
-import {Link, Route} from 'react-router-dom';
+import React, {useContext, Fragment} from 'react';
+import {Link} from 'react-router-dom';
 import ROUTE from '../../Route';
 import UserAuthContext from '../../context/Auth/UserAuth/UserAuthContext';
 import Avatar from '../../images/svg/avatar.svg';
 import './style.css';
-import Logo from '../Logo';
 
 const Navbar = () => {
     const userAuthContext = useContext(UserAuthContext);
@@ -34,7 +33,7 @@ const Navbar = () => {
                     <img src={Avatar} alt="avatar" width="30" height="30" className="rounded-circle"/>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link className="dropdown-item">Tableau de bord</Link>
+                    <Link className="dropdown-item" to=''>Tableau de bord</Link>
                     <Link className="dropdown-item" to={ROUTE.HOME}>parametre</Link>
                     <button className="dropdown-item" onClick={logout}>Déconnexion</button>
                 </div>
@@ -56,7 +55,7 @@ const Navbar = () => {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link className="nav-link" to={ROUTE.HOME}>
-                            Accueil <span class="sr-only">(current)</span>
+                            Accueil <span className="sr-only">(current)</span>
                         </Link>
                     </li>
                     <li className="nav-item">

@@ -31,31 +31,28 @@ function UserRegister(props) {
     const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            firstname: '',
+            lastname: '',
             email: '',
-            phone: '',
-            address: '',
+            contacts: '',
             password: '',
             confirmPassword: ''
         },
         validationSchema: Yup.object({
-            firstName: Yup.string()
+            firstname: Yup.string()
                 .min(3, 'Au moins Trois(3) caractères !')
                 .max(50, 'Quinze(15) caratères au maximum !')
                 .required('ce champs est requis !'),
-            lastName: Yup.string()
+            lastname: Yup.string()
                 .min(3, 'Au moins Trois(3) caractères !')
                 .max(50, 'Quinze(15) caratères au maximum !')
                 .required('ce champs est requis !'),
             email: Yup.string()
                 .email('Email invalide')
                 .required('ce champ est requis !'),
-            phone: Yup.string()
+            contacts: Yup.string()
                 .min(10, 'Le numéro doit contenir 10 chiffres !')
                 .matches(phoneRegex, "Numéro invalide")
-                .required('ce champ est requis !'),
-            address: Yup.string()
                 .required('ce champ est requis !'),
             password: Yup.string()
                 .min(6, 'Votre mot de passe doit contenir au moins six(6) caractères !')
@@ -65,6 +62,7 @@ function UserRegister(props) {
                 .required('ce champs est requis')
         }),
         onSubmit: (values) => {
+            delete values.confirmPassword;
             userRegister(values);
         }
       })
@@ -85,29 +83,29 @@ function UserRegister(props) {
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="text"
-                                name="firstName"
-                                id="firstName"
+                                name="firstname"
+                                id="firstname"
                                 placeholder="Entrer votre nom"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.firstName}
                             />
-                            {formik.touched.firstName && formik.errors.firstName ? (
-                                <div className="error">{formik.errors.firstName}</div>
+                            {formik.touched.firstname && formik.errors.firstname ? (
+                                <div className="error">{formik.errors.firstname}</div>
                             ) : null}
                         </div>
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="text"
-                                name="lastName"
-                                id="lastName"
+                                name="lastname"
+                                id="lastname"
                                 placeholder="Entrer votre prénoms"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.lastName}
+                                value={formik.values.lastname}
                             />
-                            {formik.touched.lastName && formik.errors.lastName ? (
-                                <div className="error">{formik.errors.lastName}</div>
+                            {formik.touched.lastname && formik.errors.lastname ? (
+                                <div className="error">{formik.errors.lastname}</div>
                             ) : null}
                         </div>
                         <div className="col-md-12 mb-2">
@@ -127,29 +125,15 @@ function UserRegister(props) {
                         <div className="col-md-12 mb-2">
                             <InputField
                                 type="tel"
-                                name="phone"
-                                id="phone"
+                                name="contacts"
+                                id="contacts"
                                 placeholder="Entrer votre numéro de téléphone"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.phone}
+                                value={formik.values.contacts}
                             />
-                            {formik.touched.phone && formik.errors.phone ? (
-                                <div className="error">{formik.errors.phone}</div>
-                            ) : null}
-                        </div>
-                        <div className="col-md-12 mb-2">
-                            <InputField
-                                type="text"
-                                name="address"
-                                id="address"
-                                placeholder="Entrer votre adresse"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.address}
-                            />
-                            {formik.touched.address && formik.errors.address ? (
-                                <div className="error">{formik.errors.address}</div>
+                            {formik.touched.contacts && formik.errors.contacts ? (
+                                <div className="error">{formik.errors.contacts}</div>
                             ) : null}
                         </div>
                         <div className="col-md-12 mb-2">
