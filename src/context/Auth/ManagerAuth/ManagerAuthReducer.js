@@ -131,7 +131,7 @@ const reducer = (state, action) => {
         case UPDATE_INFO:
             return {
                 ...state,
-                success: action.payload.messsage
+                success: action.payload.message
             }
         case ERR_UPDATE_INFO:
             return {

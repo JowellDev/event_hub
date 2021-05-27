@@ -20,13 +20,10 @@ const ManagerEventDetail = (props) => {
 
     let {id} = useParams();
 
-    
-    
     useEffect(() => {
         if(!managerIsAuth){
             props.history.push(ROUTE.ORGANISER_LOGIN)
         }
-
         getEvent(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [managerIsAuth])
@@ -47,7 +44,7 @@ const ManagerEventDetail = (props) => {
                             <div className="row">
                                 <div className="col-md-9">
                                 <div className="mb-3">
-                                    <Link to={ROUTE.MANAGER_DASH} className="text-muted">
+                                    <Link to={ROUTE.MANAGER_DASH} className="text-danger">
                                         <i class="fa fa-backward" aria-hidden="true"></i> Retour
                                     </Link>
                                 </div>

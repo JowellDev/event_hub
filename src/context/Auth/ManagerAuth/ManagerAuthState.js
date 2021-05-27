@@ -59,6 +59,8 @@ const ManagerAuthState = props => {
     const clearError = () => { dispatch({type: CLEAR_ERRORS})}
     const clearSuccess = () => { dispatch({type: CLEAR_SUCCESS})}
 
+
+    //Création d'un event par un manager
     const createEvent = async (FormData) => {
         try{
             const res = await Api.post('/event/store', FormData);
@@ -69,6 +71,7 @@ const ManagerAuthState = props => {
         
     }
 
+    //Récupération des infos d'un manager
     const getManagerEvents = async (id) => {
         try{
             const res = await Api.get(`/organizer/${id}`);
@@ -78,6 +81,7 @@ const ManagerAuthState = props => {
         }
     }
     
+    //récupération d'un event par un manager
     const getEvent = async (id) => {
         try{
             const res = await Api.get(`/events/${id}`);
@@ -88,6 +92,7 @@ const ManagerAuthState = props => {
         
     }
 
+    //Publication - depublication d'un event par un manager
     const publishEvent = async (id, formData) => {
         try{
             const res = await Api.put(`/event/publication/${id}`, formData);
@@ -97,6 +102,7 @@ const ManagerAuthState = props => {
         }
     }
 
+    //Suppression d'un event par un manager
     const deleteEvent = async (id) => {
         try{
             const res = await Api.delete(`/event/${id}`);
@@ -106,6 +112,7 @@ const ManagerAuthState = props => {
         }
     }
 
+    //Mise à jour du mot de passe du manager
     const resetPassword = async (id, formData) => {
         try {
             const res = await Api.put(`/organizer/password-reset/${id}`, formData)
@@ -115,6 +122,7 @@ const ManagerAuthState = props => {
         }
     }
 
+    //Mise à jour des informations du manager
     const updateInfo = async (id, formData) => {
         try {
             const res = await Api.put(`organizer/${id}`, formData)
