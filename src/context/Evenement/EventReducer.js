@@ -1,13 +1,6 @@
 import {
-    CREATE_EVENT,
-    UPDATE_EVENT,
-    DELETE_EVENT,
-    FILTER_EVENT,
-    CLEAR_FILTER,
-    CLEAR_ERRORS,
     SET_LOADING,
     GET_EVENTS,
-    GET_EVENT
 } from './type';
 
 const reducer = (state, action) => {
@@ -16,12 +9,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 events: action.payload,
-                loading: false
-            }
-        case GET_EVENT:
-            return {
-                ...state,
-                event: action.payload,
                 loading: false
             }
 

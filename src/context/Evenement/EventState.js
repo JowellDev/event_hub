@@ -5,11 +5,6 @@ import Api from '../../utils/api';
 import {
     SET_LOADING,
     GET_EVENTS,
-    GET_EVENT,
-    CREATE_EVENT,
-    DELETE_EVENT,
-    UPDATE_EVENT,
-    PUBLISH_EVENT
 } from './type';
 
 const EventState = props =>{
@@ -17,7 +12,6 @@ const EventState = props =>{
         events: null,
         loading: false,
         error: null,
-        event: null
     }
     const [state, dispatch] = useReducer(EventReducer, initialState);
 
@@ -38,7 +32,6 @@ const EventState = props =>{
         <EventContext.Provider
             value={{
                 events: state.events,
-                event: state.event,
                 loading: state.false,
                 error: state.error,
                 getEvents,

@@ -11,7 +11,6 @@ import {
     GET_EVENT,
     DELETE_EVENT,
     GET_MANAGER,
-    SET_AUTH_USER,
     ERR_UPDATE_INFO,
     UPDATE_INFO
 } from '../types';
@@ -19,16 +18,6 @@ import Api from '../../../utils/api';
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case SET_AUTH_USER:
-            return {
-                ...state,
-                token: action.payload.token,
-                manager: action.payload.user,
-                managerIsAuth: true,
-                managerEvents: action.payload.user.events,
-                loading: false,
-
-            }
         case REGISTER_SUCCESS:
           localStorage.setItem('token', action.payload.token.access_token);
           localStorage.setItem('user', JSON.stringify(action.payload.organizer));
@@ -36,9 +25,9 @@ const reducer = (state, action) => {
           return{
                 ...state,
                 token: action.payload.token.access_token,
-                manager: action.payload.organizer,
+                manager: action.payload.user,
                 managerIsAuth: true,
-                managerEvents: action.payload.organizer.events,
+                managerEvents: action.payload.user.events,
                 loading: false,
           }
         case REGISTER_FAIL:
@@ -56,14 +45,14 @@ const reducer = (state, action) => {
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('token', action.payload.token.access_token);
-            localStorage.setItem('user', JSON.stringify(action.payload.organizer));
+            localStorage.setItem('user', JSON.stringify(action.payload.user));
             Api.defaults.headers.Authorization = `Bearer ${action.payload.token.access_token}`;
             return{
                 ...state,
                 token: action.payload.token.access_token,
-                manager: action.payload.organizer,
+                manager: action.payload.user,
                 managerIsAuth: true,
-                managerEvents: action.payload.organizer.events,
+                managerEvents: action.payload.user.events,
                 loading: false
             }
         case LOGIN_FAIL:

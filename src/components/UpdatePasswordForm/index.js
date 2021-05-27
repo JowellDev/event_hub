@@ -1,12 +1,10 @@
-import React, {useContext} from 'react';
-import ManagerAuthContext from '../../context/Auth/ManagerAuth/ManagerAuthContext';
+import React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import InputField from '../InputField';
 
-const UpdatePasswordForm = () => {
-    const managerContext = useContext(ManagerAuthContext);
-    const {manager, resetPassword} = managerContext;
+const UpdatePasswordForm = ({resetPassword, id}) => {
+
     const formik = useFormik({
         initialValues: {
             old_password: '',
@@ -25,9 +23,7 @@ const UpdatePasswordForm = () => {
                 .required('ce champs est requis')
         }),
         onSubmit: (values) => {
-            if(manager._id){
-                resetPassword(manager._id, values)
-            }
+            resetPassword(id, values)
         }
       })
 

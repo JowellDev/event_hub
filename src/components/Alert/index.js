@@ -6,7 +6,7 @@ function Alert() {
     const {alerts} = alertContext;
     return (
         alerts.length > 0 && alerts.map(alert => (
-            <div key={alert.id} className={`alert alert-${alert.type}`} data-aos="zoom-in-up">
+            <div key={alert.id} className={`alert alert-${alert.type}`} data-aos="fade-up">
                 {alert.msg}
             </div>
         ))

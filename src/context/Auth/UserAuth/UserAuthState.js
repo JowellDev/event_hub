@@ -8,17 +8,22 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    CLEAR_SUCCESS,
+    GET_USER,
+    UPDATE_INFO,
+    ERR_UPDATE_INFO
 } from '../types';
 
 const UserAuthState = props =>{
     const initialState = {
         token: localStorage.getItem('token'),
-        userIsAuth: localStorage.getItem('userIsAuth'),
-        user: localStorage.getItem('user'),
-        favorites_events: null,
+        user: JSON.parse(localStorage.getItem('user')),
+        userIsAuth: null,
+        favourite_events: null,
         loading: true,
-        error: null
+        error: null,
+        success: null
     }
     const [state, dispatch] = useReducer(UserAuthReducer, initialState);
 
@@ -41,11 +46,39 @@ const UserAuthState = props =>{
     }
 
     const logoutUser = async () => {
-        await Api.delete('/logout')
+        await Api.delete('/logout');
         dispatch({type: LOGOUT});
     }
 
+    const getUser = async (id) => {
+        try {
+            const res = await Api.get(`/user/${id}`);
+            dispatch({type: GET_USER, payload: res.data})
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const updateInfo = async (id, formData) => {
+        try {
+            const res = await Api.put(`/user/${id}`, formData);
+            dispatch({type:UPDATE_INFO, payload: res.data});
+        }catch(err){
+            dispatch({type: ERR_UPDATE_INFO});
+        }
+    }
+
+    const resetPassword = async (id, formData) => {
+        try {
+            const res = await Api.put(`/user/password-reset/${id}`, formData)
+            dispatch({type: UPDATE_INFO, payload: res.data})
+        } catch (err) {
+            dispatch({type: ERR_UPDATE_INFO, payload: err.response.data})
+        }
+    }
+
     const clearError = () => dispatch({type:CLEAR_ERRORS});
+    const clearSuccess = () => dispatch({type: CLEAR_SUCCESS});
 
     return(
         <UserAuthContext.Provider
@@ -55,11 +88,16 @@ const UserAuthState = props =>{
                 loading: state.loading,
                 error: state.error,
                 user: state.user,
-                favorites_events: state.favorites_events,
+                success: state.success,
+                favourite_events: state.favourite_events,
                 userRegister,
                 loginUser,
                 logoutUser,
-                clearError
+                clearError,
+                clearSuccess,
+                getUser,
+                updateInfo,
+                resetPassword
             }}
         >
             {props.children}

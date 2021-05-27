@@ -13,7 +13,7 @@ const GestionDeCompteManager = (props) => {
     
     const managerAuthContext = useContext(ManagerAuthContext);
     const alertContext = useContext(AlertContext);
-    const {managerIsAuth, success, clearSuccess, error, clearError, manager, getManagerEvents} = managerAuthContext;
+    const {managerIsAuth, success, clearSuccess, error, clearError, manager, getManagerEvents, resetPassword} = managerAuthContext;
     const {setAlert} = alertContext;
 
     useEffect(() => {
@@ -59,17 +59,37 @@ const GestionDeCompteManager = (props) => {
                                     <div className="alert text-white-50 bg-dark text-center">
                                         Mes informations
                                     </div>
-                                    <div class="card mb-2">
+                                    <div class="card mb-2 bg-danger">
                                         <div class="card-body p-2 d-flex flex-row">
                                             <div>
                                                 <img src={manangerSvg} className="img-fluid" width="200" height="200" alt='manager svg' />
                                             </div>
-                                            <div className="ml-3">
-                                                <div> <b>Nom :</b> {manager.name}</div>
-                                                <div> <b>Email :</b> {manager.email}</div>
-                                                <div><b>contacts :</b> {manager.contacts}</div>
-                                                <div><b>date d'inscription :</b> {manager.created_at}</div>
+                                            <div className="ml-3 text-white">
+                                                <div className="mb-2"> <b>Nom :</b> {manager.name}</div>
+                                                <div className="mb-2"> <b>Email :</b> {manager.email}</div>
+                                                <div className="mb-2"><b>contacts :</b> {manager.contacts}</div>
+                                                <div className="mb-2"><b>date d'inscription :</b> {manager.created_at}</div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="alert alert-info text-center">
+                                        Gestion de compte organisateur
+                                    </div>
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <UpdateEmailForm/>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <UpdatePasswordForm resetPassword={resetPassword} id={manager._id}/>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <button className="btn btn-danger btn-block">Suppression de compte</button>
                                         </div>
                                     </div>
                                 </div>
@@ -77,26 +97,6 @@ const GestionDeCompteManager = (props) => {
                             <div></div>
                         }
                         
-                        <div className="col-md-7">
-                            <div className="alert alert-info text-center">
-                                Gestion de compte
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <UpdateEmailForm/>
-                                </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <UpdatePasswordForm />
-                                </div>
-                            </div>
-                            <div class="card mb-2">
-                                <div class="card-body">
-                                    <button className="btn btn-danger btn-block">Suppression de compte</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

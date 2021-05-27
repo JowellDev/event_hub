@@ -2,6 +2,7 @@
 import React, {useEffect, useContext} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
 import ManagerAuthContext from '../../../../context/Auth/ManagerAuth/ManagerAuthContext';
 import EventForm from '../../../../components/createEventForm';
 import ROUTE from '../../../../Route';
@@ -44,7 +45,7 @@ const ManagerEventDetail = (props) => {
                             <div className="row">
                                 <div className="col-md-9">
                                 <div className="mb-3">
-                                    <Link to={ROUTE.MANAGER_DASH} className="text-danger">
+                                    <Link to={ROUTE.MANAGER_DASH} className="text-muted">
                                         <i class="fa fa-backward" aria-hidden="true"></i> Retour
                                     </Link>
                                 </div>
@@ -55,9 +56,21 @@ const ManagerEventDetail = (props) => {
                                 </div>
                                 <div className="jumbotron">
                                     <div className="row">
+                                        {event.allow ? 
+                                            <div className="col-md-12 mb-2">
+                                                <div className="alert alert-success">
+                                                    Evenement autorisé !
+                                                </div>
+                                            </div> :
+                                            <div className="col-md-12 mb-2">
+                                                <div className="alert alert-danger">
+                                                    L'evenement a été bloqué, veuillez contactez la direction de <strong>event hub.</strong>
+                                                </div>
+                                            </div>
+                                        }
                                         <div className="col-md-6 mb-2"><b>Nom de l'évenement :</b> {event.name}</div>
                                         <div className="col-md-6 mb-2"><b>Lieu de déroulement :</b> {event.location}</div>
-                                        <div className="col-md-6 mb-2 text-success"><b>Prix :</b> {event.price === 0 ? 'gratuit' : event.price}</div>
+                                        <div className="col-md-6 mb-2 text-success"><b>Prix :</b> {event.price === 0 ? 'gratuit' : event.price + ' Fcfa'}</div>
                                         <div className="col-md-6 mb-2"><b>nombre de place : </b>{event.available_places}</div>
                                         <div className="col-md-6 mb-2"><b>Heure de début :</b> {event.start_at}</div>
                                         <div className="col-md-6 mb-2"><b>Heure de fin :</b> {event.end_at}</div>
@@ -128,6 +141,7 @@ const ManagerEventDetail = (props) => {
                  
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

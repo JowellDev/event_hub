@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import Navbar from '../../../components/Navbar';
+import Footer from '../../../components/Footer';
 import EventTable from '../../../components/EventTable';
 import ManagerAuthContext from '../../../context/Auth/ManagerAuth/ManagerAuthContext';
 import AlertContext from '../../../context/Alert/AlertContext';
@@ -67,6 +68,7 @@ const ManagerDashboard = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }
