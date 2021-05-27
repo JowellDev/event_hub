@@ -6,7 +6,8 @@ import {
     CLEAR_FILTER,
     CLEAR_ERRORS,
     SET_LOADING,
-    GET_EVENTS
+    GET_EVENTS,
+    GET_EVENT
 } from './type';
 
 const reducer = (state, action) => {
@@ -17,6 +18,13 @@ const reducer = (state, action) => {
                 events: action.payload,
                 loading: false
             }
+        case GET_EVENT:
+            return {
+                ...state,
+                event: action.payload,
+                loading: false
+            }
+
         case SET_LOADING:
             return {
                 ...state,

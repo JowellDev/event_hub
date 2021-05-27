@@ -2,15 +2,23 @@ import React, {useContext, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import ROUTE from '../../Route';
 import UserAuthContext from '../../context/Auth/UserAuth/UserAuthContext';
+import ManagerAuthContext from '../../context/Auth/ManagerAuth/ManagerAuthContext';
 import Avatar from '../../images/svg/avatar.svg';
 import './style.css';
 
 const Navbar = () => {
     const userAuthContext = useContext(UserAuthContext);
+    const managerAuthContext = useContext(ManagerAuthContext);
     const {logoutUser, userIsAuth, user} = userAuthContext;
+    const {logoutManager, managerIsAuth, manager} = managerAuthContext;
 
     const logout = () => {
-        logoutUser()
+        if(managerIsAuth){
+            logoutManager()
+        }else{
+            logoutUser()
+        }
+        
     }
 
     const guestLink = (
@@ -25,17 +33,32 @@ const Navbar = () => {
         </Fragment>
     )
 
+    const UserDropdown = (
+        <Fragment>
+            <Link className="dropdown-item" to={ROUTE.USER_DASH}>Tableau de bord</Link>
+            <Link className="dropdown-item" to={ROUTE.USER_ACCOUNT_MANAGER}>parametre</Link>
+            <button className="dropdown-item" onClick={logout}>Déconnexion</button>
+        </Fragment>
+    )
+
+    const ManagerDropdown = (
+        <Fragment>
+            <Link className="dropdown-item" to={ROUTE.MANAGER_DASH}>Tableau de bord</Link>
+            <Link className="dropdown-item" to={ROUTE.MANAGER_ACCOUNT_MANAGER}>parametre</Link>
+            <button className="dropdown-item" onClick={logout}>Déconnexion</button>
+        </Fragment>
+    )
+
     const authLink = (
         <Fragment>
             <li className="nav-item dropdown mr-5">
                 <a className="nav-link dropdown-toggle" href="!#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {user && user.lastname}
+                    {(user && user.lastname) || (manager && manager.name)}
                     <img src={Avatar} alt="avatar" width="30" height="30" className="rounded-circle"/>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link className="dropdown-item" to=''>Tableau de bord</Link>
-                    <Link className="dropdown-item" to={ROUTE.HOME}>parametre</Link>
-                    <button className="dropdown-item" onClick={logout}>Déconnexion</button>
+                    {managerIsAuth && ManagerDropdown}
+                    {userIsAuth && UserDropdown}
                 </div>
             </li>
         </Fragment>
@@ -63,7 +86,7 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
-                    {userIsAuth ? authLink : guestLink}
+                    {userIsAuth || managerIsAuth ? authLink : guestLink}
                 </ul>
             </div>
         </nav>

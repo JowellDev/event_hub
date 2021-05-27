@@ -14,20 +14,19 @@ import {
 const UserAuthState = props =>{
     const initialState = {
         token: localStorage.getItem('token'),
-        userIsAuth: null,
+        userIsAuth: localStorage.getItem('userIsAuth'),
+        user: localStorage.getItem('user'),
+        favorites_events: null,
         loading: true,
-        error: null,
-        user: null
+        error: null
     }
     const [state, dispatch] = useReducer(UserAuthReducer, initialState);
 
     const userRegister = async (FormData) => {
         try {
             const res = await Api.post('/user/register', FormData);
-            console.log(res)
             dispatch({type: REGISTER_SUCCESS, payload: res.data});
         } catch (err) {
-            console.log(err)
             dispatch({type: REGISTER_FAIL, payload: err.response.data.message});
         }
     }
@@ -42,6 +41,7 @@ const UserAuthState = props =>{
     }
 
     const logoutUser = async () => {
+        await Api.delete('/logout')
         dispatch({type: LOGOUT});
     }
 
@@ -55,6 +55,7 @@ const UserAuthState = props =>{
                 loading: state.loading,
                 error: state.error,
                 user: state.user,
+                favorites_events: state.favorites_events,
                 userRegister,
                 loginUser,
                 logoutUser,

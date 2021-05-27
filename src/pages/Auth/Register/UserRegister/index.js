@@ -3,6 +3,7 @@ import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import InputField from '../../../../components/InputField';
 import UserAuthContext from '../../../../context/Auth/UserAuth/UserAuthContext';
+import ManagerAuthContext from '../../../../context/Auth/ManagerAuth/ManagerAuthContext';
 import AlertContext from '../../../../context/Alert/AlertContext';
 import Alert from '../../../../components/Alert';
 import ROUTE from '../../../../Route';
@@ -11,14 +12,19 @@ import { useFormik } from 'formik';
 import './style.css'
 
 function UserRegister(props) {
-    const userAuthContext = useContext(UserAuthContext)
-    const alertContext = useContext(AlertContext)
+    const userAuthContext = useContext(UserAuthContext);
+    const alertContext = useContext(AlertContext);
+    const managerAuthContext = useContext(ManagerAuthContext);
     const {userRegister, error, clearError, userIsAuth} = userAuthContext;
+    const {managerIsAuth} = managerAuthContext;
     const {setAlert} = alertContext;
 
     useEffect(() => {
         if(userIsAuth){
             props.history.push(ROUTE.EVENTS);
+        }
+        if(managerIsAuth){
+            props.history.push(ROUTE.MANAGER_DASH);
         }
 
         if(error){

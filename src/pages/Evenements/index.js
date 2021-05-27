@@ -40,7 +40,7 @@ const Events = (props) => {
                 </div>
                 <div className="page-content">
                    <div className="row">
-                        {events && events.map(event => <EventDetail key={event._id} event={event} userIsAuth={userIsAuth} changeFavori={changeFavori}/>)}
+                        {events && events.map(event => <EventDetail key={event._id} favori={favori} event={event} userIsAuth={userIsAuth} changeFavori={changeFavori}/>)}
                    </div>
                 </div>
             </div>

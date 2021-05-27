@@ -3,14 +3,13 @@ import EventContext from './EventContext';
 import EventReducer from './EventReducer';
 import Api from '../../utils/api';
 import {
-    CREATE_EVENT,
-    UPDATE_EVENT,
-    DELETE_EVENT,
-    FILTER_EVENT,
-    CLEAR_FILTER,
-    CLEAR_ERRORS,
     SET_LOADING,
-    GET_EVENTS
+    GET_EVENTS,
+    GET_EVENT,
+    CREATE_EVENT,
+    DELETE_EVENT,
+    UPDATE_EVENT,
+    PUBLISH_EVENT
 } from './type';
 
 const EventState = props =>{
@@ -31,7 +30,6 @@ const EventState = props =>{
             console.log(err)
             setLoading();
         }
-        
     }
 
     const setLoading = () => dispatch({type: SET_LOADING})
@@ -43,7 +41,7 @@ const EventState = props =>{
                 event: state.event,
                 loading: state.false,
                 error: state.error,
-                getEvents
+                getEvents,
             }}
         >
             {props.children}

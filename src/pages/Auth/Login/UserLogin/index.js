@@ -3,6 +3,7 @@ import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import InputField from '../../../../components/InputField';
 import UserAuthContext from '../../../../context/Auth/UserAuth/UserAuthContext';
+import ManagerAuthContext from '../../../../context/Auth/ManagerAuth/ManagerAuthContext';
 import AlertContext from '../../../../context/Alert/AlertContext';
 import Alert from '../../../../components/Alert';
 import ROUTE from '../../../../Route';
@@ -13,14 +14,19 @@ import './style.css'
 function UserLogin(props) {
 
     const userAuthContext = useContext(UserAuthContext);
+    const managerAuthContext = useContext(ManagerAuthContext);
     const alertContext = useContext(AlertContext)
     const {loginUser, userIsAuth, error, clearError} = userAuthContext;
+    const {managerIsAuth} = managerAuthContext;
     const {setAlert} = alertContext;
 
 
     useEffect(() => {
         if(userIsAuth){
-            props.history.push(ROUTE.HOME)
+            props.history.push(ROUTE.EVENTS)
+        }
+        if(managerIsAuth){
+            props.history.push(ROUTE.MANAGER_DASH)
         }
 
         if(error){

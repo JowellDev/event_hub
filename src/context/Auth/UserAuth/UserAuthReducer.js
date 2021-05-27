@@ -1,3 +1,4 @@
+import Api from '../../../utils/api';
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
@@ -10,7 +11,10 @@ import {
 const reducer = (state, action) => {
     switch (action.type) {
         case REGISTER_SUCCESS:
-          localStorage.setItem('token', action.payload.token.access_token)
+          localStorage.setItem('token', action.payload.token.access_token);
+          localStorage.setItem('user', JSON.stringify(action.payload.user));
+          localStorage.setItem('userIsAuth', true);
+          Api.defaults.headers.Authorization = `Bearer ${action.payload.token.access_token}`;
           return{
                 ...state,
                 ...action.payload,
@@ -19,7 +23,10 @@ const reducer = (state, action) => {
                 loading: false
           }
         case REGISTER_FAIL:
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('userIsAuth');
+            Api.defaults.headers.Authorization = null;
             return{
                 ...state,
                 token: null,
@@ -29,7 +36,10 @@ const reducer = (state, action) => {
                 loading: true
             }
         case LOGIN_SUCCESS:
-            localStorage.setItem('token', action.payload.token.access_token)
+            localStorage.setItem('token', action.payload.token.access_token);
+            localStorage.setItem('user', JSON.stringify(action.payload.user));
+            localStorage.setItem('userIsAuth', true);
+            Api.defaults.headers.Authorization = `Bearer ${action.payload.token.access_token}`;
             return{
                 ...state,
                 ...action.payload,
@@ -37,7 +47,10 @@ const reducer = (state, action) => {
                 loading: false
             }
         case LOGIN_FAIL:
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('userIsAuth');
+            Api.defaults.headers.Authorization = null;
             return{
                 ...state,
                 token: null,
@@ -47,7 +60,10 @@ const reducer = (state, action) => {
                 loading: true
             }
         case LOGOUT:
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('userIsAuth');
+            Api.defaults.headers.Authorization = null;
             return{
                 ...state,
                 token:null,

@@ -16,8 +16,11 @@ const Login = (props) => {
     const {managerIsAuth} = managerAuthContext;
 
     useEffect(() => {
-        if(userIsAuth || managerIsAuth){
+        if(userIsAuth){
             props.history.push(ROUTE.EVENTS);
+        }
+        if(managerIsAuth){
+            props.history.push(ROUTE.MANAGER_DASH);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userIsAuth, props.history])
