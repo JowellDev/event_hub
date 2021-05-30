@@ -9,7 +9,11 @@ import {
     CLEAR_SUCCESS,
     GET_USER,
     UPDATE_INFO,
-    ERR_UPDATE_INFO
+    ERR_UPDATE_INFO,
+    DELETE_EVENT,
+    ADD_TO_FAVOURITES,
+    PARTICIPE_TO_EVENT,
+    ERROR
 } from '../types';
 
 const reducer = (state, action) => {
@@ -86,6 +90,21 @@ const reducer = (state, action) => {
                 ...state,
                 success: action.payload.message
             }
+        case DELETE_EVENT:
+            return {
+                ...state,
+                success: action.payload.message
+            }
+        case PARTICIPE_TO_EVENT:
+            return {
+                ...state,
+                success: action.payload.message
+            }
+        case ADD_TO_FAVOURITES:
+        return {
+            ...state,
+            success: action.payload.message
+        }
         case ERR_UPDATE_INFO:
             return {
                 ...state,
@@ -100,6 +119,11 @@ const reducer = (state, action) => {
             return{
                 ...state,
                 success:null
+            }
+        case ERROR:
+            return {
+                ...state,
+                error: action.payload.message
             }
         default:
             break;

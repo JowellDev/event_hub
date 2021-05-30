@@ -2,16 +2,25 @@ import React from 'react';
 import './style.css';
 
 const EventDetail = (props) => {
-    const { userIsAuth, favori, changeFavori, event } = props;
+    const {userIsAuth, event , participeToEvent, addToFavourite, user} = props;
+
+    const addTo = (eventId) => {
+        if(user){
+            addToFavourite(eventId, user._id)
+        }
+    }
+    const participeTo = (eventId) => {
+        if(user){
+            participeToEvent(eventId, user._id)
+        }
+    }
+
     return (
         <div className="col-12 event-card">
             <div className="row">
                 <div className="col-4 img">
                     <span className="card-img-price">
                         pass : {event.price ? `${event.price} Frcfa` : 'gratuit'}
-                    </span>
-                    <span title="Ajouter aux favoris">
-                        {userIsAuth && <i className={favori ? "fas fa-heart" : "far fa-heart"} onClick={changeFavori}></i>}
                     </span>
                 </div>
                 <div className="col-8 details">
@@ -23,8 +32,14 @@ const EventDetail = (props) => {
                         Date : <span className="text-danger bold">{event.start_at}</span>
                     </div>
                     <div className="mb-2">
-                        <button className="btn btn-secondary" data-toggle="modal" data-target="#modelId">Détails</button>
-                    </div>  
+                        <button className="btn btn-dark mr-2 mb-1" data-toggle="modal" data-target="#modelId">Détails</button>
+                        {userIsAuth ? 
+                        <>
+                            <button className="btn btn-primary mr-2 mb-1" onClick={()=> participeTo(event._id)}>je participe</button>
+                            <button className="btn btn-success mr-2 mb-1" onClick={()=> addTo(event._id)}>ajouter comme favori</button>
+                        </>: <div></div>}
+                        
+                    </div>   
                 </div>   
             </div>
             
@@ -52,7 +67,7 @@ const EventDetail = (props) => {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Je suis intéressé</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Je participe</button>
                         </div>
                     </div>
                 </div>

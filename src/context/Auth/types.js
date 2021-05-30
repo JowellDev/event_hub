@@ -10,6 +10,9 @@ export const GET_MANAGER = 'GET_MANAGER';
 export const GET_USER = 'GET_USER';
 export const UPDATE_INFO = 'UPDATE_INFO';
 export const ERR_UPDATE_INFO = 'ERR_UPDATE_INFO';
+export const PARTICIPE_TO_EVENT = 'PARTICIPE_TO_EVENT';
+export const ADD_TO_FAVOURITES = 'ADD_TO_FAVOURITES';
+export const ERROR = 'ERROR';
 
 
 //MANAGER EVENTS

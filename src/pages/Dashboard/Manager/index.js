@@ -7,7 +7,6 @@ import AlertContext from '../../../context/Alert/AlertContext';
 import EventForm from '../../../components/createEventForm';
 import Alert from '../../../components/Alert';
 import ROUTE from '../../../Route';
-import './style.css';
 
 const ManagerDashboard = (props) => {
     const managerAuthContext = useContext(ManagerAuthContext);
@@ -43,31 +42,29 @@ const ManagerDashboard = (props) => {
 
     return (
         <div>
-            <Navbar/>
-            <div id="dashboard_content">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-12 mb-2 mt-2">
-                            <Alert/>
+            <Navbar/>   
+            <div className="container-fluid mt-4">
+                <div className="row">
+                    <div className="col-md-12 mb-2 mt-2">
+                        <Alert/>
+                    </div>
+                    <div className="col-md-9">
+                        <div className="alert alert-info text-center">
+                            Mes evenements
                         </div>
-                        <div className="col-md-9">
-                            <div className="alert alert-info text-center">
-                                Mes evenements
-                            </div>
-                            <EventTable events={managerEvents}/>
+                        <EventTable events={managerEvents}/>
+                    </div>
+                    <div className="col-md-3">
+                        <div className="alert alert-dark text-center">
+                            Ajouter un évènement
                         </div>
-                        <div className="col-md-3">
-                            <div className="alert alert-dark text-center">
-                                Ajouter un évènement
-                            </div>
-                            <EventForm
-                                create={createEvent} 
-                                manager={manager} 
-                            />
-                        </div>
+                        <EventForm
+                            create={createEvent} 
+                            manager={manager} 
+                        />
                     </div>
                 </div>
-            </div>
+                </div>
             <Footer />
         </div>
     )

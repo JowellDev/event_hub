@@ -12,7 +12,11 @@ import {
     CLEAR_SUCCESS,
     GET_USER,
     UPDATE_INFO,
-    ERR_UPDATE_INFO
+    ERR_UPDATE_INFO,
+    DELETE_EVENT,
+    ADD_TO_FAVOURITES,
+    PARTICIPE_TO_EVENT,
+    ERROR
 } from '../types';
 
 const UserAuthState = props =>{
@@ -59,6 +63,15 @@ const UserAuthState = props =>{
         }
     }
 
+    const deleteEvent = async (eventId, userId) => {
+        try {
+            const res = await Api.delete(`/user/favourite-event/${userId}/${eventId}`);
+            dispatch({type:DELETE_EVENT, payload: res.data});
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     const updateInfo = async (id, formData) => {
         try {
             const res = await Api.put(`/user/${id}`, formData);
@@ -80,6 +93,25 @@ const UserAuthState = props =>{
     const clearError = () => dispatch({type:CLEAR_ERRORS});
     const clearSuccess = () => dispatch({type: CLEAR_SUCCESS});
 
+
+    const participeToEvent = async (eventId, userId) => {
+        try {
+            const res = await Api.post(`/event/participant/${eventId}/${userId}`);
+            dispatch({type:PARTICIPE_TO_EVENT, payload: res.data});
+        }catch(err){
+            dispatch({type:ERROR, payload: err.response.data})
+        }
+    }
+
+    const addToFavourite = async (eventId, userId) => {
+        try {
+            const res = await Api.post(`/user/favourite-event/${userId}/${eventId}`);
+            dispatch({type:ADD_TO_FAVOURITES, payload: res.data});
+        }catch(err){
+            dispatch({type:ERROR, payload: err.response.data})
+        }
+    }
+
     return(
         <UserAuthContext.Provider
             value={{
@@ -97,7 +129,10 @@ const UserAuthState = props =>{
                 clearSuccess,
                 getUser,
                 updateInfo,
-                resetPassword
+                resetPassword,
+                deleteEvent,
+                participeToEvent,
+                addToFavourite
             }}
         >
             {props.children}

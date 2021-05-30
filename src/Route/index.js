@@ -12,6 +12,8 @@ const Route = {
     MANAGER_ACCOUNT_MANAGER: '/organizer/dashboard/compte/parametre',
     USER_ACCOUNT_MANAGER: '/user/dashboard/compte/parametre',
     MANAGER_VIEW_EVENT: '/organizer/dashboard/myevent/:id',
+    ADMIN_LOGIN: '/admin/login',
+    ADMIN_DASH: '/admin/dashboard',
 }
 
 export default Route;

@@ -15,7 +15,8 @@ import {
     GET_EVENT,
     GET_MANAGER,
     UPDATE_INFO,
-    ERR_UPDATE_INFO
+    ERR_UPDATE_INFO,
+    DELETE_EVENT
 } from '../types';
 
 const ManagerAuthState = props => {
@@ -106,7 +107,7 @@ const ManagerAuthState = props => {
     const deleteEvent = async (id) => {
         try{
             const res = await Api.delete(`/event/${id}`);
-            dispatch({type: PUBLISH_EVENT, payload: res.data})
+            dispatch({type: DELETE_EVENT, payload: res.data})
         }catch(err) {
             console.log(err)
         }
