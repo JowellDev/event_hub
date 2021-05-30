@@ -23,7 +23,7 @@ const ManagerAuthState = props => {
 
     const initialState = {
         token: localStorage.getItem('token'),
-        manager: localStorage.getItem('user'),
+        manager: JSON.parse(localStorage.getItem('user')),
         managerIsAuth: null,
         managerEvents: [],
         event: null,
