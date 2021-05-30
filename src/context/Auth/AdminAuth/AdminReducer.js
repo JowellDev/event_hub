@@ -9,7 +9,8 @@ import {
     GET_MANAGERS,
     GET_USERS,
     GET_ADMINS,
-    GET_EVENTS,
+    GET_PUBLISH_EVENTS,
+    GET_UNPUBLISH_EVENTS,
     ACTION_SUCCESS,
     ACTION_FAILED
 } from '../types';
@@ -71,22 +72,27 @@ const reducer = (state, action) => {
         case GET_MANAGERS:
             return {
                 ...state,
-                managers: action.payload,
+                managers: action.payload.organizers,
             }
         case GET_USERS:
             return {
                 ...state,
-                users: action.payload,
+                users: action.payload.users,
             }
         case GET_ADMINS:
             return {
                 ...state,
-                managers: action.payload,
+                managers: action.payload.admins,
             }
-        case GET_EVENTS:
+        case GET_PUBLISH_EVENTS:
             return {
                 ...state,
                 events: action.payload.events
+            }
+        case GET_UNPUBLISH_EVENTS:
+            return {
+                ...state,
+                unpublish: action.payload.events
             }
         case ACTION_SUCCESS:
             return {

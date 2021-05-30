@@ -10,7 +10,8 @@ import {
     LOGOUT,
     CLEAR_ERRORS,
     CLEAR_SUCCESS,
-    GET_EVENTS,
+    GET_PUBLISH_EVENTS,
+    GET_UNPUBLISH_EVENTS,
     GET_MANAGERS,
     GET_USERS,
     GET_ADMINS,
@@ -24,10 +25,11 @@ const AdminState = props => {
         token: localStorage.getItem('token'),
         admin: JSON.parse(localStorage.getItem('admin')),
         adminIsAuth: null,
-        users: [],
-        events: [],
-        admins: [],
-        organizers: [],
+        users: null,
+        events: null,
+        unpublish: null,
+        admins: null,
+        managers: null,
         success: null,
         error: null
         
@@ -63,9 +65,46 @@ const AdminState = props => {
 
     const getUsers = async () => {
         try {
-            const res = await Api.get()
+            const res = await Api.get('/users')
+            dispatch({type: GET_USERS, payload: res.data})
         } catch (err) {
-            
+            console.log(err)
+        }
+    }
+
+    const getManagers = async () => {
+        try {
+            const res = await Api.get('/organizers')
+            dispatch({type: GET_MANAGERS, payload: res.data})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getEvents = async () => {
+        try {
+            const res = await Api.get('/events')
+            dispatch({type: GET_PUBLISH_EVENTS, payload: res.data})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getUnpublished = async () => {
+        try {
+            const res = await Api.get('/events/unpublished')
+            dispatch({type: GET_UNPUBLISH_EVENTS, payload: res.data})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getAdmins = async () => {
+        try {
+            const res = await Api.get('/admins')
+            dispatch({type: GET_ADMINS, payload: res.data})
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -81,16 +120,22 @@ const AdminState = props => {
                 adminIsAuth: state.adminIsAuth,
                 admin: state.admin,
                 users: state.users,
-                organizers: state.organizers,
+                managers: state.managers,
                 admins: state.admins,
-                events: state.event,
+                events: state.events,
+                unpublish: state.unpublish,
                 success: state.success,
                 error: state.error,
                 loginAdmin,
                 createAdmin,
                 logout,
                 clearError,
-                clearSuccess
+                clearSuccess,
+                getUsers,
+                getManagers,
+                getEvents,
+                getUnpublished,
+                getAdmins
             }}
         >
             {props.children}

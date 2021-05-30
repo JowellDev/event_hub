@@ -29,7 +29,8 @@ export const GET_EVENT = 'GET_EVENT';
 export const GET_ADMINS = "GET_ADMINS";
 export const GET_USERS = "GET_USERS";
 export const GET_MANAGERS = "GET_MANAGERS";
-export const GET_EVENTS = "GET_EVENTS";
+export const GET_PUBLISH_EVENTS = "GET_PUBLISH_EVENTS";
+export const GET_UNPUBLISH_EVENTS = "GET_UNPUBLISH_EVENTS";
 export const ACTION_SUCCESS = "ACTION_SUCCESS";
 export const ACTION_FAILED = "ACTION_FAILED";
 
