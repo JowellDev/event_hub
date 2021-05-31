@@ -45,27 +45,27 @@ const AdminDashboard = (props) => {
     useEffect(() => {
         getManagers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [managers])
+    }, [success])
 
     useEffect(() => {
         getUnpublished()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [unpublish])
+    }, [success])
 
     useEffect(() => {
         getUsers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [users])
+    }, [success])
 
     useEffect(() => {
         getAdmins()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [admins])
+    }, [success])
 
     useEffect(() => {
         getEvents()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [events])
+    }, [success])
 
     return (
         <div>

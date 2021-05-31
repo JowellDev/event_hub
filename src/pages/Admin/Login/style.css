@@ -1,0 +1,13 @@
+.img-left{
+    background-color: #F70F0F; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .img-left{
+        display: none;
+    }
+}
