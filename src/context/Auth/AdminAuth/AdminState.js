@@ -12,6 +12,7 @@ import {
     CLEAR_SUCCESS,
     GET_PUBLISH_EVENTS,
     GET_UNPUBLISH_EVENTS,
+    GET_BLOQUED_EVENTS,
     GET_MANAGERS,
     GET_USERS,
     GET_ADMINS,
@@ -27,6 +28,7 @@ const AdminState = props => {
         adminIsAuth: null,
         users: null,
         events: null,
+        bloqued: null,
         unpublish: null,
         admins: null,
         managers: null,
@@ -54,13 +56,9 @@ const AdminState = props => {
         }
     }
 
-    const logout = async () => {
-        try {
-            await Api.delete('/logout')
-            dispatch({type: LOGOUT})
-        } catch (err) {
-            console.log(err);
-        }
+    const logoutAdmin = async () => {
+        await Api.delete('/logout')
+        dispatch({type: LOGOUT})
     }
 
     const getUsers = async () => {
@@ -99,6 +97,15 @@ const AdminState = props => {
         }
     }
 
+    const getBloqued = async () => {
+        try {
+            const res = await Api.get('/events/unauthorized')
+            dispatch({type: GET_BLOQUED_EVENTS, payload: res.data})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const getAdmins = async () => {
         try {
             const res = await Api.get('/admins')
@@ -110,6 +117,24 @@ const AdminState = props => {
 
     const clearError = () => { dispatch({type: CLEAR_ERRORS})}
     const clearSuccess = () => { dispatch({type: CLEAR_SUCCESS})}
+
+    const bloqueEvent = async (id, formData) => {
+        try{
+            const res = await Api.put(`/event/authorization/${id}`, formData)
+            dispatch({type: ACTION_SUCCESS, payload: res.data})
+        }catch(err){
+            dispatch({type: ACTION_FAILED, payload: err.response.data})
+        }
+    }
+
+    const activeAccount = async (id, formData) => {
+        try {
+            const res = await Api.put(`/organizer/activation/${id}`, formData)
+            dispatch({type: ACTION_SUCCESS, payload: res.data})
+        } catch (err) {
+            dispatch({type: ACTION_FAILED, payload: err.response.data})
+        }
+    }
 
    
 
@@ -126,16 +151,20 @@ const AdminState = props => {
                 unpublish: state.unpublish,
                 success: state.success,
                 error: state.error,
+                bloqued: state.bloqued,
                 loginAdmin,
                 createAdmin,
-                logout,
+                logoutAdmin,
                 clearError,
                 clearSuccess,
                 getUsers,
                 getManagers,
                 getEvents,
+                getBloqued,
                 getUnpublished,
-                getAdmins
+                activeAccount,
+                getAdmins,
+                bloqueEvent
             }}
         >
             {props.children}

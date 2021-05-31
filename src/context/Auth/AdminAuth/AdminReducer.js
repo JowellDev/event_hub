@@ -11,6 +11,7 @@ import {
     GET_ADMINS,
     GET_PUBLISH_EVENTS,
     GET_UNPUBLISH_EVENTS,
+    GET_BLOQUED_EVENTS,
     ACTION_SUCCESS,
     ACTION_FAILED
 } from '../types';
@@ -55,8 +56,8 @@ const reducer = (state, action) => {
             Api.defaults.headers.Authorization = null;
             return{
                 ...state,
-                token:null,
-                admin:null,
+                token: null,
+                admin: null,
                 adminIsAuth: false,
             }
         case CLEAR_ERRORS:
@@ -82,12 +83,17 @@ const reducer = (state, action) => {
         case GET_ADMINS:
             return {
                 ...state,
-                managers: action.payload.admins,
+                admins: action.payload.admins,
             }
         case GET_PUBLISH_EVENTS:
             return {
                 ...state,
                 events: action.payload.events
+            }
+        case GET_BLOQUED_EVENTS:
+            return {
+                ...state,
+                bloqued: action.payload.events
             }
         case GET_UNPUBLISH_EVENTS:
             return {
