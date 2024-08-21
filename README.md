@@ -1,7 +1,7 @@
 E-vent HUB est une solution apportée au milieu de l'évènementiel.
-Il s'agit d'une application web qui permet aux organisateurs d'events de faire connaitre leurs évènements au grand public et d'avoir une meilleur visibilité sur l'intérêt qu'a le public vis-à-vis de leur event.
+Il s'agit d'une application web qui permet aux organisateurs d'events de faire connaitre leurs évènements au grand public et d'avoir une meilleure visibilité sur l'intérêt qu'a le public vis-à-vis de leur event.
 
-Dans un prémier temps nous conevons un MVP( Minimum Viable Product) pour avoir un retour de nos premier utilisateur.
+Dans un prémier temps nous conçevons un MVP( Minimum Viable Product) pour avoir un retour de nos premiers utilisateurs.
 Ce MVP a pour fonctionnalités majeures:
 
         - Authentification
